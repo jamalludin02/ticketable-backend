@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
+
+
 return new class extends Migration
 {
     /**
@@ -18,7 +21,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->foreignId('position_id')->nullable()->constrained('positions')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('status_id')->nullable()->constrained('statuses')->nullOnDelete()->cascadeOnUpdate();
+            $table->timestamps(3);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
